@@ -54,6 +54,5 @@ int main(int argc, char const *argv[])
         auto err = parser.errno_name(state);
         std::cout << "Error: " << err << "\n";
 
-
     return 0;
 }
