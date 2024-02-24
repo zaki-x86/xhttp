@@ -83,6 +83,16 @@ namespace xhttp {
         }
     }
 
+    int parser::message_needs_eof()
+    {
+        return Impl()->_message_needs_eof();
+    }
+
+    int parser::should_keep_alive()
+    {
+        return Impl()->_should_keep_alive();
+    }
+
     parser& parser::pause() {
         if (Impl()->error != Errno::OK) {
             return *this;
