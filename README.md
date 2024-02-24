@@ -62,3 +62,24 @@ int main(int argc, char const *argv[])
 }
 
 ```
+
+Output:
+
+```
+Parsing started!
+Method: POST
+Url: /
+Version: 1.1
+Header: Host
+Value: www.example.com
+Header: Content-Type
+Value: application/x-www-form-urlencoded
+Header: Content-Length
+Value: 4
+Header: Connection
+Value: close
+Headers complete!
+Body: q=42
+Message complete!
+Error: OK
+```
