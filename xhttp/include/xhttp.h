@@ -574,7 +574,7 @@ namespace xhttp {
 
     class parser {
     public:
-        parser();
+        parser(uint8_t type = Type::BOTH);
 
         ~parser();
     
@@ -689,6 +689,8 @@ namespace xhttp {
 
         /* Returns textual name of HTTP status */
         const char* status_name(uint16_t status);
+
+        size_t content_length() const;
 
         /* Enables/disables lenient header value parsing (disabled by default).
         *

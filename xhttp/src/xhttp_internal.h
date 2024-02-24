@@ -38,6 +38,9 @@ struct parser::llhttp__internal_t {
     int __internal_init();
 
     llhttp__internal_t();
+
+    llhttp__internal_t(uint8_t type);
+
     ~llhttp__internal_t();
 
     int __internal_execute(const char* p, const char* en_p);

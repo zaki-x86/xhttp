@@ -9224,7 +9224,7 @@ parser::llhttp__internal_t::llhttp__internal_t()
         data(nullptr),
         _current((void*) (intptr_t) s_n_llhttp__internal__n_start),
         content_length(0),
-        type(0),
+        type(Type::BOTH),
         method(0),
         http_major(0),
         http_minor(0),
@@ -9236,6 +9236,30 @@ parser::llhttp__internal_t::llhttp__internal_t()
         status_code(0),
         initial_message_completed(0),
         settings(new parse_settings)
+{}
+
+xhttp::parser::llhttp__internal_t::llhttp__internal_t(uint8_t _type)
+  :   _index(0),
+      _span_pos0(nullptr),
+      _span_cb0(nullptr),
+      error(0),
+      reason(nullptr),
+      error_pos(nullptr),
+      data(nullptr),
+      _current((void*) (intptr_t) s_n_llhttp__internal__n_start),
+      content_length(0),
+      type(_type),
+      method(0),
+      http_major(0),
+      http_minor(0),
+      header_state(0),
+      lenient_flags(0),
+      upgrade(0),
+      finish(0),
+      flags(0),
+      status_code(0),
+      initial_message_completed(0),
+      settings(new parse_settings)
 {}
 
 parser::llhttp__internal_t::~llhttp__internal_t()
@@ -9644,7 +9668,7 @@ int parser::llhttp__internal_t::_after_message_complete(const unsigned char* p, 
 
 int parser::llhttp__internal_t::_on_message_begin(const unsigned char* p, const unsigned char* endp) {
     int err;
-    err = settings->on_message_begin(); 
+    CALLBACK_MAYBE(on_message_begin);
     return err;
 }
 

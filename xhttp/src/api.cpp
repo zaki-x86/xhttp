@@ -6,8 +6,8 @@
 #include "xhttp_internal.h"                                          
 
 namespace xhttp {
-    parser::parser()
-        : m_Impl(new llhttp__internal_t)
+    parser::parser(uint8_t type)
+        : m_Impl(new llhttp__internal_t(type))
     {}
 
     parser::~parser() = default;
@@ -165,6 +165,11 @@ namespace xhttp {
             default: abort();
         }
         #undef HTTP_STATUS_GEN
+    }
+
+    size_t parser::content_length() const
+    {
+        return Impl()->content_length;
     }
 
     parser& parser::set_lenient_headers(int enabled) {
