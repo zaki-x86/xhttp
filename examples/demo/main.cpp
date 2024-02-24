@@ -1,10 +1,3 @@
-# `xhttp`
-
-Reimplementation of [nodejs/llhttp](https://github.com/nodejs/llhttp) with Clean C++ API
-
-## Usage
-
-```cpp
 #include <xhttp>
 #include <iostream>
 
@@ -13,7 +6,7 @@ int main(int argc, char const *argv[])
     const char* data = "POST / HTTP/1.1\r\nHost: www.example.com\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 4\r\nConnection: close\r\n\r\nq=42\r\n\r\n";
     xhttp::parser parser;
     
-    parser
+    int state = parser
         .on_msg_begin([](){
             std::cout << "Parsing started!\n";
             return xhttp::Errno::OK;
@@ -58,7 +51,9 @@ int main(int argc, char const *argv[])
         })
         .execute(data, strlen(data));
 
+        auto err = parser.errno_name(state);
+        std::cout << "Error: " << err << "\n";
+
+
     return 0;
 }
-
-```
